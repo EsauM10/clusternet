@@ -5,7 +5,10 @@ import socket
 from mininet.log import info
 from clusternet.apis.worker.data import WorkerInstance
 
-client = docker.from_env()
+try:
+    client = docker.from_env()
+except:
+    print('[clusternet]: Docker is not installed')
 
 def get_hostname() -> str:
     return socket.gethostname()

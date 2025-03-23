@@ -3,7 +3,10 @@ from typing import Any, List
 
 from clusternet.client.worker import RemoteWorker
 
-client = docker.from_env()
+try:
+    client = docker.from_env()
+except:
+    print('[clusternet]: Docker is not installed')
 
 CLUSTERNET_PREFIX = 'cn.'
 
