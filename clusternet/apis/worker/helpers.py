@@ -5,10 +5,6 @@ import socket
 from mininet.log import info
 from clusternet.apis.worker.data import WorkerInstance
 
-try:
-    client = docker.from_env()
-except:
-    print('[clusternet]: Docker is not installed')
 
 def get_hostname() -> str:
     return socket.gethostname()
@@ -28,4 +24,5 @@ def clean_containers_with_prefix(prefix: str) -> List[str]:
     return removed_containers
 
 def run_container(name: str, image: str, **params: Any):
+    client = docker.from_env()
     client.containers.run(image, name=name, remove=True, detach=True, **params)
