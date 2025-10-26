@@ -1,7 +1,10 @@
 from clusternet.apis.presentation.helpers import error, internal_server_error, success
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
-from clusternet.apis.worker.helpers import WorkerInstance, get_hostname
-
+from clusternet.apis.worker.helpers import (
+    WorkerInstance, 
+    clear_containers_with_prefix, 
+    get_hostname
+)
 
 class StopWorkerController(Controller):
     def __init__(self) -> None:
@@ -18,9 +21,12 @@ class StopWorkerController(Controller):
 
             self.net.stop()
             WorkerInstance.clear_instance()
+            return success({'content': f'[{hostname}]: Containernet stopped'})
         except Exception as ex:
             message = f'{ex}'
             return internal_server_error(error(message))
+        finally:
+            clear_containers_with_prefix(prefix='mn.')
         
-        return success({'content': f'[{hostname}]: Containernet stopped'})
+        
             
