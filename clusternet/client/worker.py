@@ -50,7 +50,7 @@ class RemoteWorker:
 
     def clean_containers(self, prefix: str):
         data = {'containers_prefix': prefix}
-        response = httpx.post(url=f'{self.url}/containers/clean', json=data, timeout=None)
+        response = httpx.post(url=f'{self.url}/containers/clear', json=data, timeout=None)
 
         if(response.is_error):
             raise Exception(response.json()['error'])

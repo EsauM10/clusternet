@@ -4,11 +4,11 @@ from clusternet.apis.presentation.helpers import (
 )
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
 from clusternet.apis.worker.helpers import (
-    get_hostname, clean_containers_with_prefix, WorkerInstance
+    get_hostname, clear_containers_with_prefix, WorkerInstance
 )
 
 
-class CleanContainersController(Controller):
+class ClearContainersController(Controller):
     def __init__(self) -> None:
         pass
     
@@ -16,7 +16,7 @@ class CleanContainersController(Controller):
         try:
             validate_required_params(request, ['containers_prefix'])
             prefix = str(request.body['containers_prefix'])
-            containers = clean_containers_with_prefix(prefix)
+            containers = clear_containers_with_prefix(prefix)
             
             WorkerInstance.clear_instance()
             return success({'content': f'[{get_hostname()}]: Cleaned containers: {containers}'})

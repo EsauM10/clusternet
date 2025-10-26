@@ -10,7 +10,7 @@ def get_hostname() -> str:
     return socket.gethostname()
 
 
-def clean_containers_with_prefix(prefix: str) -> List[str]:
+def clear_containers_with_prefix(prefix: str) -> List[str]:
     client = docker.from_env()
     removed_containers = []
 

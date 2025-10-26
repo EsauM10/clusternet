@@ -10,7 +10,7 @@ except:
 
 CLUSTERNET_PREFIX = 'cn.'
 
-def clean_containers(prefix: str):
+def clear_containers(prefix: str):
     for container in client.containers.list(all=True):
         name = str(container.name) # type: ignore
         if(name.startswith(prefix)):
@@ -71,6 +71,6 @@ def run_node_exporters(workers: List[RemoteWorker]):
             privileged=True)
 
 
-def clean_workers(workers: List[RemoteWorker]):
+def clear_workers(workers: List[RemoteWorker]):
     for worker in workers:
         worker.clean_containers(prefix=CLUSTERNET_PREFIX)
